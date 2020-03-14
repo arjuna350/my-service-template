@@ -1,0 +1,6 @@
+{
+  "modelPackage": "com.modelservice.contract.model",
+  "apiPackage": "com.modelservice.contract.api",
+  "dateLibrary": "java8",
+  "hideGenerationTimestamp": true
+}

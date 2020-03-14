@@ -1,0 +1,125 @@
+/****************************************
+ * instructions for all projects
+ ****************************************/
+
+apply from: "dependencies.gradle"
+
+
+allprojects {
+    apply plugin: 'project-report'
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+
+
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    publishing {
+        repositories {
+            mavenLocal()
+        }
+    }
+/**
+    publishing {
+        repositories {
+            maven {
+                credentials {
+                    username System.getenv()['repouser']
+                    password System.getenv()['repopassword']
+                }
+                url remoteURL
+            }
+        }
+    }
+ **/
+
+
+
+    group = projectName
+    version = projectVersion
+
+    sourceCompatibility = 1.11
+    targetCompatibility = 1.11
+
+}
+
+
+/****************************************
+ * instructions for each sub project
+ ****************************************/
+subprojects {
+    apply plugin: 'jacoco'
+    apply plugin: 'checkstyle'
+
+
+    configurations.all {
+        resolutionStrategy {
+            // fail eagerly on version conflict (includes transitive dependencies)
+            // e.g. multiple different versions of the same dependency (group and name are equal)
+            //failOnVersionConflict()
+
+            // Auto force all of our explicit dependencies.
+            libs.each { k, v -> force(v) }
+            force(libs.googleGson)
+            force(libs.googleGuava)
+
+            // cache dynamic versions for 600 minutes
+            cacheDynamicVersionsFor 10 * 60, 'minutes'
+            // 30 min cache changing modules 
+            cacheChangingModulesFor 30, 'minutes'
+        }
+    }
+
+    jacoco {
+        toolVersion = "0.8.5"
+    }
+	
+	jacocoTestReport {
+        def coverageSourceDirs = ['impl/src/main/java/']			
+		reports {
+            xml.enabled true
+            csv.enabled false
+            html.enabled true
+            xml.destination file("$rootProject.buildDir/reports/coverage/xml/jacoco.xml")
+            html.destination file("$rootProject.buildDir/reports/coverage/html")
+        }
+
+    }
+    checkstyle {
+        toolVersion '8.20'
+        configFile file("../config/checkstyle/checkstyle.xml")
+    }
+
+    checkstyleMain {
+        source = 'src/main/java'
+    }
+    checkstyleTest {
+        source = 'src/test/java'
+        reports.xml.enabled = true
+    }
+
+
+    // common dependencies
+    dependencies {
+        testImplementation(
+                libs.testng
+        )
+    }
+    test {
+        useTestNG()
+        testLogging.showStandardStreams = true
+        testLogging.exceptionFormat = 'full'
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+    }
+}
+
+
+
+
+
+
+

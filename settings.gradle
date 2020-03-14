@@ -1,0 +1,13 @@
+rootProject.name = 'model-service'
+
+
+include ':model-service-rest-base',':model-service-domain',':model-service-api',':model-service-impl',':model-service-rest',':model-service-common',':model-service-embedded-service'
+
+
+project(":model-service-domain").projectDir = file("domain")
+project(":model-service-api").projectDir = file("api")
+project(":model-service-impl").projectDir = file("impl")
+project(":model-service-rest-base").projectDir = file("rest-base")
+project(":model-service-common").projectDir = file("common")
+project(":model-service-rest").projectDir = file("rest")
+project(":model-service-embedded-service").projectDir = file("embedded-service")

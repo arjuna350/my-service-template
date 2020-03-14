@@ -1,0 +1,36 @@
+
+apply plugin: 'java'
+
+
+group = 'model-service-client'
+version = '1.0.0'
+
+apply from: "../../../dependencies.gradle"
+	
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+repositories {
+    jcenter()
+}
+
+
+dependencies {
+
+implementation(
+	libs.swaggerAnnotation,
+	libs.okhttp,
+	libs.okhttpLogging,
+	libs.googleGson,
+	libs.gsonFire,
+    )
+
+testImplementation(
+ 	 libs.Junit
+    )
+
+}
+
+

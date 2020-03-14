@@ -1,0 +1,71 @@
+
+plugins {
+  id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+
+ext.moduleName = 'embedded-service'
+archivesBaseName = 'model-service' + '-' + ext.moduleName
+def  archiveFileName = archivesBaseName + '-' + projectVersion + '.' + 'jar'
+def modelSericeComponentGroup = 'com.components.model-service'
+
+apply from: "$rootDir/dependencies.gradle"
+
+jar.enabled = false
+
+shadowJar {
+   baseName = archivesBaseName
+   classifier = ''
+   archiveVersion = projectVersion
+}
+
+jar {
+
+}
+
+dependencies {
+
+    implementation(libs.modelServiceContract) {
+        changing = true
+    }
+
+    implementation(
+            project(':model-service-api'),
+            project(':model-service-impl'),
+            project(':model-service-common'),
+            libs.jacksonCore,
+            libs.javaxWRs,
+            libs.springBoot,
+            libs.jacksonCore,
+            libs.jacksonDatabind,
+            libs.jacksonAnnotations,
+            libs.jacksonDataformat,
+            libs.sunJersey,
+            libs.commonCodec,
+            libs.javaxXmlBind,
+            libs.swaggerAnnotations,
+            libs.IOswaggerannotations,
+            libs.springfoxSwagger2,
+            libs.springfoxSwaggerUi,
+            libs.springBootWeb
+    )
+}
+
+
+publishing {
+    publications {
+        publishmodelserviceembedded(MavenPublication) {
+            artifacts { 
+				artifact source: "$libsDir/$archiveFileName"
+            }
+            groupId modelSericeComponentGroup
+            artifactId archivesBaseName
+            version projectVersion
+        }
+    }
+}
+
+//if you want to publish to remote repo in patent build.gradle replace publishing repo details
+//publishPublishmodelserviceembeddedPublicationToMavenRepository.dependsOn build
+
+build.dependsOn shadowJar

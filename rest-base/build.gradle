@@ -1,0 +1,145 @@
+plugins {
+    id 'org.hidetake.swagger.generator' version '2.18.1'
+
+
+}
+
+apply from: "$rootDir/dependencies.gradle"
+def modelSericeComponentGroup = 'com.components.model-service'
+
+def archiveContractBaseName = 'model-service' + '-' + 'contract'
+def archiveRestClientBaseName = 'model-service' + '-' + 'client'
+
+
+def  archiveContractFileName = archiveContractBaseName + '-' + projectVersion + '.' + 'jar'
+def  archiveContractSourceFileName = archiveContractBaseName + '-' + projectVersion + '-sources'+ '.' + 'jar'
+def  archiveContractDocFileName = archiveContractBaseName + '-' + projectVersion + '-javadoc'+ '.' + 'jar'
+
+def  archiveRestClientFileName = archiveRestClientBaseName + '-' + projectVersion + '.' + 'jar'
+
+dependencies {
+    
+    implementation(
+
+            libs.jacksonCore,
+            libs.javaxWRs,
+            libs.springBoot,
+            libs.jacksonCore,
+            libs.jacksonDatabind,
+            libs.jacksonAnnotations,
+
+            libs.jacksonDataformat,
+            libs.sunJersey,
+            libs.commonCodec,
+            libs.javaxXmlBind,
+            libs.swaggerAnnotations,
+            libs.IOswaggerannotations,
+            libs.springfoxSwagger2,
+            libs.springfoxSwaggerUi,
+            libs.springBootWeb
+    )
+
+
+    swaggerCodegen libs.swaggeCodegenCli
+    swaggerUI libs.swaggerUi
+}
+
+
+swaggerSources {
+    modelstore {
+        inputFile = file("src/main/resources/model-service.yml")
+
+        code {
+            language = 'spring'
+            configFile = file("src/main/resources/rest-server-config.json")
+            outputDir = file("$buildDir/contract")
+            components = ['models', 'apis']
+        }
+    }
+
+    modelstoreclient {
+        inputFile = file("src/main/resources/model-service.yml")
+
+        code {
+            language = 'java'
+            configFile = file("src/main/resources/java-client-config.json")
+            outputDir = file("$buildDir/restclient")
+        }
+    }
+
+}
+
+
+
+
+task buildmodelserver(type: GradleBuild, dependsOn: 'copymodelserverbuildscipt') {
+    dir = "$buildDir/contract"
+    buildFile = file("$buildDir/contract/build.gradle")
+    tasks = ["build"]
+}
+
+task buildmodelclient(type: GradleBuild, dependsOn: 'copymodelclientbuildscipt' ) {
+    dir = "$buildDir/restclient"
+    buildFile = file("$buildDir/restclient/build.gradle")
+    tasks = ["build"]
+}
+
+
+
+task copymodelserverbuildscipt(type: Copy) {
+
+    from "src/main/resources"
+    into "$buildDir/contract"
+    include 'build.gradle_server', 'settings.gradle_server'
+
+    rename { it - ~/\.gradle_server$/ + '.gradle' }
+}
+
+
+task copymodelclientbuildscipt(type: Copy) {
+
+
+    from "src/main/resources"
+    into "$buildDir/restclient"
+    include 'build.gradle_client', 'settings.gradle_client'
+
+    rename { it - ~/\.gradle_client$/ + '.gradle' }
+}
+
+
+publishing {
+    publications {
+
+       
+        publishmodelservicecontract(MavenPublication) {
+            artifacts { 
+				artifact source: "$buildDir/contract/build/libs/$archiveContractFileName"
+               // artifact sourceJar: "$buildDir/contract/build/libs/$archiveContractSourceFileName"
+            }
+            groupId modelSericeComponentGroup
+            artifactId archiveContractBaseName
+            version projectVersion
+        }
+
+        publishmodelserviceclient(MavenPublication) {
+            artifacts { 
+				artifact source: "$buildDir/restclient/build/libs/$archiveRestClientFileName"
+            }
+            groupId modelSericeComponentGroup
+            artifactId archiveRestClientBaseName
+            version projectVersion
+        }
+
+    }
+}
+
+ 
+compileJava.dependsOn generateSwaggerCode
+build.dependsOn 'buildmodelserver' ,'buildmodelclient'
+
+//if you want to publish to remote repo in patent build.gradle replace publishing repo details
+//publishPublishmodelservicecontractPublicationToMavenRepository.dependsOn build
+//publishPublishmodelserviceclientPublicationToMavenRepository.dependsOn build
+publishPublishmodelservicecontractPublicationToMavenLocal.dependsOn build
+publishPublishmodelserviceclientPublicationToMavenLocal.dependsOn build
+publishAllPublicationsToMavenLocalRepository.dependsOn build

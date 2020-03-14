@@ -1,0 +1,39 @@
+ext.moduleName = 'common'
+archivesBaseName = 'model-service' + '-' + ext.moduleName
+def  archiveFileName = archivesBaseName + '-' + projectVersion + '.' + 'jar'
+
+apply from: "$rootDir/dependencies.gradle"
+
+
+jar {
+    enabled = true
+}
+
+dependencies {
+	
+	  implementation(libs.modelServiceContract) {
+			changing = true
+		}
+
+    implementation(
+            project(':model-service-api'),
+            project(':model-service-impl'),
+            libs.jacksonCore,
+            libs.javaxWRs,
+            libs.springBoot,
+            libs.jacksonCore,
+            libs.jacksonDatabind,
+            libs.jacksonAnnotations,
+            libs.jacksonDataformat,
+            libs.sunJersey,
+            libs.commonCodec,
+            libs.javaxXmlBind,
+            libs.swaggerAnnotations,
+            libs.IOswaggerannotations,
+            libs.springfoxSwagger2,
+            libs.springfoxSwaggerUi,
+            libs.springBootWeb
+    )
+}
+
+compileJava.dependsOn project(':model-service-rest-base').publishToMavenLocal

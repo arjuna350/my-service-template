@@ -1,0 +1,59 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group = 'model-service-contract'
+version = '1.0.0'
+
+apply from: "../../../dependencies.gradle"
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.+'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+
+dependencies {
+
+ implementation(
+	libs.swaggerAnnotation,
+	libs.okhttp,
+	libs.okhttpLogging,
+	libs.googleGson,
+	libs.gsonFire,
+	libs.slf4jLlog4j12,
+	libs.springCore,
+	libs.springfoxSwagger2,
+	libs.springfoxSwaggerUi,
+	libs.springWebMvc,
+	libs.springWeb,
+	libs.jacksonDatatype,
+	libs.servletApi,
+	libs.validationApi,
+	
+ )
+
+ testImplementation(
+ 	 libs.Junit,
+	 libs.httpClient,
+	 libs.ng
+
+ )
+
+}
+
+

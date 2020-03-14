@@ -1,0 +1,21 @@
+ext.moduleName = 'impl'
+archivesBaseName = 'model-service' + '-' + ext.moduleName
+def  archiveFileName = archivesBaseName + '-' + projectVersion + '.' + 'jar'
+
+
+
+apply from: "$rootDir/dependencies.gradle"
+dependencies {
+
+    implementation(
+            project(':model-service-domain'),
+            project(':model-service-api'),
+            libs.commonsLang,
+            libs.googleGson
+    )
+
+    testImplementation(
+            libs.mockito
+    )
+}
+

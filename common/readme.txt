@@ -1,0 +1,1 @@
+Write common util classes , Adapter class to transform rest domain pobject to business domain objects .

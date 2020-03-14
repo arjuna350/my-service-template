@@ -1,0 +1,16 @@
+ext.moduleName = 'domain'
+archivesBaseName = 'model-service' + '-' + ext.moduleName
+def  archiveFileName = archivesBaseName + '-' + projectVersion + '.' + 'jar'
+
+jar {
+    enabled = true
+}
+apply from: "$rootDir/dependencies.gradle"
+
+dependencies {
+    implementation(
+            libs.springCore,
+            libs.commonCodec,
+            libs.googleGson
+		)
+}

@@ -1,0 +1,1 @@
+define business domain objects.

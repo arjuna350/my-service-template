@@ -1,0 +1,13 @@
+{
+  "modelPackage": "com.modelservice.contract.model",
+  "apiPackage": "com.modelservice.contract.api",
+  "configPackage": "com.modelservice.contract.config",
+  "invokerPackage": "swagger",
+  "library": "spring-mvc",
+  "dateLibrary": "java8",
+  "hideGenerationTimestamp": true,
+  "basePackage": "$projectDir",
+  "title": "model-service",
+  "swaggerDocketConfig": true,
+  "interfaceOnly": true
+}

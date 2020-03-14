@@ -1,0 +1,14 @@
+ext.moduleName = 'api'
+archivesBaseName = group + '.' + ext.moduleName
+
+apply from: "$rootDir/dependencies.gradle"
+jar {
+    enabled = true
+}
+
+dependencies {
+    implementation(
+            project(':model-service-domain'),
+            libs.commonsLang
+    )
+}

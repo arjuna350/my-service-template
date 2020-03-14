@@ -1,0 +1,2 @@
+implenentation of code generated rest api contract . Rest api generated contract will be found under rest-base build/contact
+it will be embedded service functionality call without spinning rest server.

@@ -1,0 +1,64 @@
+plugins {
+    id 'war'
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'org.hidetake.swagger.generator' version '2.18.1'
+
+
+}
+
+apply from: "$rootDir/dependencies.gradle"
+
+def archiveWarBaseName = 'model-service' + '-' + 'rest'
+def  archiveWarFileName = archiveWarBaseName + '-' + projectVersion + '.' + 'war'
+
+dependencies {
+
+  implementation(libs.modelServiceContract) {
+			changing = true
+		}
+    implementation(
+           // project(':model-service-rest-base'),
+            project(':model-service-api'),
+            project(':model-service-impl'),
+            project(':model-service-common'),
+            libs.jacksonCore,
+            libs.javaxWRs,
+            libs.springBoot,
+            libs.jacksonCore,
+            libs.jacksonDatabind,
+            libs.jacksonAnnotations,
+            libs.jacksonDataformat,
+            libs.sunJersey,
+            libs.commonCodec,
+            libs.javaxXmlBind,
+            libs.swaggerAnnotations,
+            libs.IOswaggerannotations,
+            libs.springfoxSwagger2,
+            libs.springfoxSwaggerUi,
+            libs.springBootWeb
+    )
+
+}
+
+publishing {
+    publications {
+
+        publishmodelservicerest(MavenPublication) {
+            artifacts { 
+				artifact source: "$libsDir/$archiveWarFileName"
+            }
+            groupId group
+            artifactId archiveWarBaseName
+            version projectVersion
+        }
+
+       
+
+    }
+}
+
+
+compileJava.dependsOn project(':model-service-rest-base').publishToMavenLocal
+//publishPublishmodelservicerestPublicationToMavenRepository.dependsOn build
+

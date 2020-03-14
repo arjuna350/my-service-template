@@ -1,0 +1,105 @@
+ext {
+    versions = [
+            modelServiceContract: '1.0.0',
+            springCore          : '5.2.2.RELEASE',
+            commonsLang         : '3.7',
+
+            googleGson          : '1.8.5',
+            commonCodec         : '1.1',
+            apacheCommons       : '3.7',
+            javaxWRs            : '2.0',
+            springBoot          : '2.2.2.RELEASE',
+            jacksonCore         : '2.9.8',
+            jacksonDatabind     : '2.9.8',
+            jacksonAnnotations  : '2.9.8',
+            jacksonDataformat   : '2.9.8',
+            sunJersey           : '1.16',
+            javaxXmlBind        : '2.2.6',
+            springfoxSwagger2   : '2.9.2',
+            springfoxSwaggerUi  : '2.8.0',
+            springBootWeb       : '2.1.3.RELEASE',
+            swaggerAnnotations  : '2.0.7',
+            IOswaggerannotations: '1.6.0',
+            googleGson          : '2.8.5',
+            googleGuava         : '20.0',
+
+            swaggeCodegenCli    : '3.0.18',
+            swaggerUi           : '3.10.0',
+
+            testng              : '7.1.0',
+            mockito             : '1.9.5',
+            karateApache        : '0.8.0',
+            karateCore          : '0.8.0',
+            karateTestng        : '0.8.0',
+            wiremock            : '2.25.1',
+
+            swaggerAnnotation           :    '2.0.0',
+            okhttp           :    '2.7.5',
+            okhttpLogging           :    '2.7.5',
+            gsonFire           :    '1.8.3',
+            slf4jLlog4j12           :    '1.7.21',
+            springCore           :    '5.2.2.RELEASE',
+            springWebMvc           :   '5.2.2.RELEASE',
+            springWeb           :    '5.2.2.RELEASE',
+            jacksonDatatype           :    '2.9.8',
+            servletApi           :    '2.5',
+            validationApi           :    '1.1.0.Final',
+            Junit           :    '4.12',
+            httpClient           :    '4.5.2',
+            ng           :    '6.8.8'
+
+    ]
+    libs = [
+
+			modelServiceContract: "com.components.model-service:model-service-contract:$versions.modelServiceContract",
+            springCore          : "org.springframework:spring-core:$versions.springCore",
+            commonsLang         : "org.apache.commons:commons-lang3:$versions.commonsLang",
+            googleGson          : "com.google.code.gson:gson:$versions.googleGson",
+            jacksonCore         : "com.fasterxml.jackson.core:jackson-core:$versions.jacksonCore",
+            javaxWRs            : "javax.ws.rs:javax.ws.rs-api:$versions.javaxWRs",
+            springBoot          : "org.springframework.boot:spring-boot-starter-web:$versions.springBoot",
+            jacksonCore         : "com.fasterxml.jackson.core:jackson-core:$versions.jacksonCore",
+
+            jacksonDatabind     : "com.fasterxml.jackson.core:jackson-databind:$versions.jacksonDatabind",
+            jacksonAnnotations  : "com.fasterxml.jackson.core:jackson-annotations:$versions.jacksonAnnotations",
+            jacksonDataformat   : "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$versions.jacksonDataformat",
+            sunJersey           : "com.sun.jersey:jersey-client:$versions.sunJersey",
+            commonCodec         : "commons-codec:commons-codec:$versions.commonCodec",
+            javaxXmlBind        : "javax.xml.bind:jaxb-api:$versions.javaxXmlBind",
+            swaggerAnnotations  : "io.swagger.core.v3:swagger-annotations:$versions.swaggerAnnotations",
+            IOswaggerannotations: "io.swagger:swagger-annotations:$versions.IOswaggerannotations",
+            springfoxSwagger2   : "io.springfox:springfox-swagger2:$versions.springfoxSwagger2",
+            springfoxSwaggerUi  : "io.springfox:springfox-swagger-ui:$versions.springfoxSwaggerUi",
+            springBootWeb       : "org.springframework.boot:spring-boot-starter-web:$versions.springBootWeb",
+            googleGson          : "com.google.code.gson:gson:$versions.googleGson",
+            googleGuava         : "com.google.guava:guava:$versions.googleGuava",
+            swaggeCodegenCli    : "io.swagger.codegen.v3:swagger-codegen-cli:$versions.swaggeCodegenCli",
+            swaggerUi           : "org.webjars:swagger-ui:$versions.swaggerUi",
+
+
+            testng              : "org.testng:testng:$versions.testng",
+            mockito             : "org.mockito:mockito-all:$versions.mockito",
+            karateApache        : "com.intuit.karate:karate-apache:$versions.karateApache",
+            karateCore          : "com.intuit.karate:karate-core:$versions.karateCore",
+            karateTestng        : "com.intuit.karate:karate-testng:$versions.karateTestng",
+            wiremock            : "com.github.tomakehurst:wiremock:$versions.wiremock",
+
+
+            swaggerAnnotation           :    "io.swagger.core.v3:swagger-annotations:$versions.swaggerAnnotation",
+            okhttp           :    "com.squareup.okhttp:okhttp:$versions.okhttp",
+            okhttpLogging           :    "com.squareup.okhttp:logging-interceptor:$versions.okhttpLogging",
+            gsonFire           :    "io.gsonfire:gson-fire:$versions.gsonFire",
+            slf4jLlog4j12           :    "org.slf4j:slf4j-log4j12:$versions.slf4jLlog4j12",
+            springWebMvc           :    "org.springframework:spring-webmvc:$versions.springWebMvc",
+            springWeb           :    "org.springframework:spring-web:$versions.springWeb",
+            jacksonDatatype           :    "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$versions.jacksonDatatype",
+            servletApi           :    "javax.servlet:servlet-api:$versions.servletApi",
+            validationApi           :    "javax.validation:validation-api:$versions.validationApi",
+            Junit           :    "junit:junit:$versions.Junit",
+            httpClient           :    "org.apache.httpcomponents:httpclient:$versions.httpClient",
+            ng           :    "org.ng:ng:$versions.ng",
+
+
+
+    ]
+}
